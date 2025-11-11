@@ -133,7 +133,9 @@ def launch(
         )
         raise typer.Exit(code=1)
 
-    if (extra is None or len(extra) == 0) and workspace_manager.workspace_type == WorkspaceType.DEFAULT:
+    if (extra is None or len(extra) == 0) and \
+        (workspace_manager.workspace_type == WorkspaceType.DEFAULT or \
+        resolved_workspace == workspace_manager.config_manager.get(constants.CONFIG_KEY_DEFAULT_WORKSPACE)):
         launch_extras = workspace_manager.config_manager.config["DEFAULT"].get(
             constants.CONFIG_KEY_DEFAULT_LAUNCH_EXTRAS, ""
         )
